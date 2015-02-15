@@ -36,10 +36,10 @@
 #include <log/logd.h>
 #include <log/logger.h>
 
-#define LOGGER_LOG_MAIN		"log/main"
-#define LOGGER_LOG_RADIO	"log/radio"
-#define LOGGER_LOG_EVENTS	"log/events"
-#define LOGGER_LOG_SYSTEM	"log/system"
+#define LOGGER_LOG_MAIN		"alog/main"
+#define LOGGER_LOG_RADIO	"alog/radio"
+#define LOGGER_LOG_EVENTS	"alog/events"
+#define LOGGER_LOG_SYSTEM	"alog/system"
 
 #define LOG_BUF_SIZE 1024
 
