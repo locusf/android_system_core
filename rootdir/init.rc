@@ -475,7 +475,8 @@ service lmkd /system/bin/lmkd
     critical
     socket lmkd seqpacket 0660 system system
 
-service servicemanager /system/bin/servicemanager
+# Use mer custom service manager
+service servicemanager /usr/libexec/droid-hybris/system/bin/servicemanager
     class core
     user system
     group system
