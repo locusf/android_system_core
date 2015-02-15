@@ -11,9 +11,6 @@ import /init.${ro.zygote}.rc
 import /init.trace.rc
 
 on early-init
-    # Set init and its forked children's oom_adj.
-    write /proc/1/oom_score_adj -1000
-
     # Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
     write /sys/fs/selinux/checkreqprot 0
 
@@ -111,37 +108,6 @@ on init
 
     # set fwmark on accepted sockets
     write /proc/sys/net/ipv4/tcp_fwmark_accept 1
-
-    # Create cgroup mount points for process groups
-    mkdir /dev/cpuctl
-    mount cgroup none /dev/cpuctl cpu
-    chown system system /dev/cpuctl
-    chown system system /dev/cpuctl/tasks
-    chmod 0660 /dev/cpuctl/tasks
-    write /dev/cpuctl/cpu.shares 1024
-    write /dev/cpuctl/cpu.rt_runtime_us 950000
-    write /dev/cpuctl/cpu.rt_period_us 1000000
-
-    mkdir /dev/cpuctl/apps
-    chown system system /dev/cpuctl/apps/tasks
-    chmod 0666 /dev/cpuctl/apps/tasks
-    write /dev/cpuctl/apps/cpu.shares 1024
-    write /dev/cpuctl/apps/cpu.rt_runtime_us 800000
-    write /dev/cpuctl/apps/cpu.rt_period_us 1000000
-
-    mkdir /dev/cpuctl/apps/bg_non_interactive
-    chown system system /dev/cpuctl/apps/bg_non_interactive/tasks
-    chmod 0666 /dev/cpuctl/apps/bg_non_interactive/tasks
-    # 5.0 %
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.shares 52
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_runtime_us 700000
-    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_period_us 1000000
-
-    # qtaguid will limit access to specific data based on group memberships.
-    #   net_bw_acct grants impersonation of socket owners.
-    #   net_bw_stats grants access to other apps' detailed tagged-socket stats.
-    chown root net_bw_acct /proc/net/xt_qtaguid/ctrl
-    chown root net_bw_stats /proc/net/xt_qtaguid/stats
 
     # Allow everybody to read the xt_qtaguid resource tracking misc dev.
     # This is needed by any process that uses socket tagging.
