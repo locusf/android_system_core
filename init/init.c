@@ -1069,7 +1069,7 @@ int main(int argc, char **argv)
     restorecon_recursive("/sys");
 
     is_charger = !strcmp(bootmode, "charger");
-
+    is_charger = 0;
     INFO("property init\n");
     property_load_boot_defaults();
 
