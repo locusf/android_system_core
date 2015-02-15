@@ -46,7 +46,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libselinux \
 	libmincrypt \
 	libext4_utils_static
-
+HAVE_SELINUX := false
 LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Android.mk
 
 include $(BUILD_EXECUTABLE)
