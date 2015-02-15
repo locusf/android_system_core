@@ -33,7 +33,7 @@ on init
     sysclktz 0
 
     loglevel 3
-
+    export LD_LIBRARY_PATH /usr/libexec/droid-hybris/lib-dev-alog/:/vendor/lib:/system/lib
     # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
