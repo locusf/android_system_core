@@ -288,11 +288,6 @@ on post-fs-data
     #setprop vold.post_fs_data_done 1
 
 on boot
-    # basic network init
-    ifup lo
-    hostname localhost
-    domainname localdomain
-
     # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
 
@@ -583,14 +578,6 @@ service keystore /system/bin/keystore /data/misc/keystore
 service dumpstate /system/bin/dumpstate -s
     class main
     socket dumpstate stream 0660 shell log
-    disabled
-    oneshot
-
-service mdnsd /system/bin/mdnsd
-    class main
-    user mdnsr
-    group inet net_raw
-    socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
 
