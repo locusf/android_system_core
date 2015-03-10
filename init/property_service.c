@@ -312,7 +312,7 @@ void handle_property_set_fd()
         msg.value[0] = 0;
         if (msg.name) {
             /* If we have a value, copy it over, otherwise returns the default */
-            rproperty = property_get(msg.name);
+            rproperty = property_get(msg.name, msg.value);
             if (rproperty) {
                 strlcpy(msg.value, rproperty, sizeof(msg.value));
             }
